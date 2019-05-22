@@ -84,9 +84,9 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         $task->content = $request->content;
-        $message->save();
+        $task->save();
         
-        return redorect("/");
+        return redirect("/");
     }
 
     /**

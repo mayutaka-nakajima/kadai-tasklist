@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
+use App\User;
+
 class TasksController extends Controller
 {
     /**
@@ -84,8 +86,15 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         
-        return view("tasks.show", ["task" => $task]);
+        if (\Auth::id() === $task->user_id) {
+            return view("tasks.show", ["task" => $task]);
+        }
+
+        return back();
     }
+    
+    
+    
 
     /**
      * Show the form for editing the specified resource.
